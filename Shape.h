@@ -9,7 +9,7 @@
 class Shape
 {
 
-private:
+protected:
 
     struct Vector2
     {
@@ -20,7 +20,8 @@ private:
     //Vector2 * coord = new Vector2[size];
 
 public:
-
+    
+    Shape();
     Shape(double * arr);
     ~Shape();
     virtual std::string getType() const;

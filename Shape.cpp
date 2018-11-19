@@ -1,38 +1,17 @@
 #include "Shape.h"
+#include "Point.h"
 
-Shape::~Shape()
+Shape::Shape()
 {
-
     
 }
 
-std::string Shape::getType() const
+Shape::Shape(double * arr)
 {
-
 
 }
 
-double Shape::area() const
-{
-
-
-}
-
-double Shape::circumference() const
-{
-
-
-}
-
-double Shape::distance(Shape s) const
-{
-
-
-}
-
-
-
-bool Shape::isConvex() const
+Shape::~Shape()
 {
 
 

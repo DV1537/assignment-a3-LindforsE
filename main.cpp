@@ -60,10 +60,34 @@ int main(int argc, const char * argv[])
     
     //Only run if input-elements are even
 
+    //Run everything through Shape ???
+    //Set Shape as below ??? (getType / setType ?)
+    //Typecast, C-style
+
+    //Staticly allocated Shape will always be a Shape
+    //can't become Point/Line/Triangle/Polygon??
+
+    //Constructor for v these v take vertices coordinates as input
     //1 point(s) = Point
     //2 point(s) = Line
     //3 point(s) = Triangle
     //4 or more point(s) = Polygon
+
+    //Polymorphism, base class pointer
+    Shape * shape = new Shape(numbers);
+    Point * test = dynamic_cast<Point*>(shape);
+    if(test != nullptr)
+    {
+        std::cout << "sucessfull dynamic_cast";
+        //Functions go here?
+        std::cout << test->getType();
+    }
+    else
+    {
+        std::cout << "dynamic_cast failed";
+    }
+
+
 
     //Delete dynamic array (del, mem leak)
     delete [] numbers;

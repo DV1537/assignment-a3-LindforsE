@@ -12,14 +12,14 @@ private:
 
 public:
 
-    Point(double * arr);
-    std::string getType() const;
-    double area() const;
-    double circumference() const;
-    //Vector2 position() const;
-    double distance(Shape s) const;
+    Point(const double * arr);
+    virtual std::string getType() const;
+    virtual double area() const;
+    virtual double circumference() const;
+    virtual Vector2 position() const;
+    virtual double distance(Shape s) const;
 
-    bool isConvex() const;
+    virtual bool isConvex() const;
 
 };
 
