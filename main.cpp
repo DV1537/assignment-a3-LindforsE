@@ -1,6 +1,7 @@
 #include "Shape.h"
 #include "Point.h"
 #include "Line.h"
+#include "Triangle.h"
 
 int main(int argc, const char * argv[])
 {
@@ -78,13 +79,21 @@ int main(int argc, const char * argv[])
 
     if(n == 1)
     {
-
+        Shape * p1 = new Point(numbers);
+        std::cout << p1->getType();
+        delete p1;
     }
     else if(n == 2)
     {
-        Shape *p1 = new Line(numbers);
-        std::cout << p1->getType();
-        delete p1;
+        Shape *l1 = new Line(numbers);
+        std::cout << l1->getType();
+        delete l1;
+    }
+    else if(n == 3)
+    {
+        Shape * t1 = new Triangle(numbers);
+        std::cout << t1->getType();
+        delete t1;
     }
 
     /*

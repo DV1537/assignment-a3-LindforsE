@@ -14,8 +14,7 @@ std::string Point::getType() const
 
 double Point::area() const
 {
-    double tmp;
-    return tmp;
+    return -1;
 }
 double Point::circumference() const
 {

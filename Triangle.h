@@ -1,24 +1,23 @@
-#ifndef LINE_H
-#define LINE_H
+#ifndef TRANGLE_H
+#define TRIANGLE_H
 #include "Shape.h"
 
-class Line : public Shape
+class Triangle : public Shape
 {
+
 private:
 
     struct Vector2
     {
         double x, y;
     };
-
-    //int size;
-    double * coord;
+    
     Vector2 * koord;
 
 public:
 
-    Line(const double * arr);
-    ~Line();
+    Triangle(const double * arr);
+    ~Triangle();
 
     //Inherited functions
     virtual std::string getType() const;
@@ -31,4 +30,5 @@ public:
 
 };
 
-#endif //LINE_H
+
+#endif //TRIANGLE_H
