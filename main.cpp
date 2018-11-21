@@ -1,5 +1,6 @@
 #include "Shape.h"
 #include "Point.h"
+#include "Line.h"
 
 int main(int argc, const char * argv[])
 {
@@ -74,7 +75,19 @@ int main(int argc, const char * argv[])
     //4 or more point(s) = Polygon
 
     //Polymorphism, base class pointer
-    Shape * shape = new Shape(numbers);
+
+    if(n == 1)
+    {
+
+    }
+    else if(n == 2)
+    {
+        Shape *p1 = new Line(numbers);
+        std::cout << p1->getType();
+        delete p1;
+    }
+
+    /*
     Point * test = dynamic_cast<Point*>(shape);
     if(test != nullptr)
     {
@@ -86,8 +99,7 @@ int main(int argc, const char * argv[])
     {
         std::cout << "dynamic_cast failed";
     }
-
-
+    */
 
     //Delete dynamic array (del, mem leak)
     delete [] numbers;
