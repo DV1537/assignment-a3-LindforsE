@@ -3,28 +3,21 @@
 Line::Line(const double * arr)
 {
     //Line, 2 sets of (X,Y)
-    coord = new double[2];
+    coord = new Vector2[2];
 
-    //coordinates in a struct, test
-    koord = new Vector2[2];
+    coord[0].x = arr[0];
+    coord[0].y = arr[1];
 
-    coord[0] = arr[0];
-    coord[1] = arr[1];
-    std::cout << "coordinate is: " << coord[0] << ", " << coord[1] << std::endl;
+    coord[1].x = 20;
+    coord[1].y = 30;
 
-    koord[0].x = arr[0];
-    koord[0].y = arr[1];
-
-    koord[1].x = 20;
-    koord[1].y = 30;
-    std::cout << "koordinate is: " << koord[0].x << ", " << koord[0].y << std::endl;
-    std::cout << "Koordinate extra is: " << koord[1].x << ", " << koord[1].y << std::endl;
-
+    std::cout << "coordinate is: " << coord[0].x << ", " << coord[0].y << std::endl;
+    std::cout << "coordinate extra is: " << coord[1].x << ", " << coord[1].y << std::endl;
 }
+
 Line::~Line()
 {
     delete [] coord;
-    delete [] koord;
 }
 
 //Inherited functions

@@ -12,8 +12,7 @@ private:
     };
 
     //int size;
-    double * coord;
-    Vector2 * koord;
+    Vector2 * coord;
 
 public:
 

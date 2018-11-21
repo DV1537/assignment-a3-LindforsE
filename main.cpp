@@ -77,19 +77,19 @@ int main(int argc, const char * argv[])
 
     //Polymorphism, base class pointer
 
-    if(n == 1)
+    if(n == 2)
     {
         Shape * p1 = new Point(numbers);
         std::cout << p1->getType();
         delete p1;
     }
-    else if(n == 2)
+    else if(n == 4)
     {
         Shape *l1 = new Line(numbers);
         std::cout << l1->getType();
         delete l1;
     }
-    else if(n == 3)
+    else if(n == 6)
     {
         Shape * t1 = new Triangle(numbers);
         std::cout << t1->getType();

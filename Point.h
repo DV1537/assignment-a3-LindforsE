@@ -7,13 +7,18 @@ class Point : public Shape
 
 private:
 
+    struct Vector2
+    {
+        double x, y;
+    };
 
-
+    Vector2 * coord;
 
 public:
 
     Point(const double * arr);
-
+    ~Point();
+    
     //Inherited functions
     virtual std::string getType() const;
     virtual double area() const;
