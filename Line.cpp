@@ -39,14 +39,20 @@ double Line::circumference() const
 
 double* Line::position() const
 {
-    double *tmp;
+    double tmp[2];
+    tmp[0] = (coord[0].x + coord[1].x)/2;
+    tmp[1] = (coord[0].y + coord[1].y)/2;
     return tmp;
 }
 
 double Line::distance(Shape s) const
 {
-    double tmp;
-    return tmp;
+    double *tmp = this->position();
+    double *other = s.position();
+
+    //Distance-algorithm
+    double dist = abs( sqrt( pow(tmp[0] - other[0], 2) + pow(tmp[1] - other[1], 2) ) );
+    return dist;
 }
 
 bool Line::isConvex() const

@@ -5,7 +5,9 @@ Point::Point(const double * arr)
 {
     //Point, 1 set of (X,Y)
     coord = new Vector2[1];
-    std::cout << "Pointer constructor";
+
+    coord[0].x = arr[0];
+    coord[0].y = arr[1];
 }
 
 Point::~Point()
@@ -26,20 +28,25 @@ double Point::area() const
 
 double Point::circumference() const
 {
-    double tmp;
-    return tmp;
+    return 0;
 }
 
 double* Point::position() const
 {
-    double *tmp;
+    double tmp[2];
+    tmp[0] = coord[0].x;
+    tmp[1] = coord[0].y;
     return tmp;
 }
 
 double Point::distance(Shape s) const
 {
-    double tmp;
-    return tmp;
+    //center-coordinates of other shape
+    double *tmp = s.position();
+
+    //Distance-algorithm
+    double dist = abs( sqrt( pow(coord[0].x - tmp[0], 2) + pow(coord[0].y - tmp[1], 2) ) );
+    return dist;
 }
 
 bool Point::isConvex() const
