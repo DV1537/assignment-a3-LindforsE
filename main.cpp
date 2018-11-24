@@ -2,6 +2,7 @@
 #include "Point.h"
 #include "Line.h"
 #include "Triangle.h"
+#include "Polygon.h"
 
 int main(int argc, const char * argv[])
 {
@@ -60,7 +61,6 @@ int main(int argc, const char * argv[])
     }
     myReadFile.close();
     
-    //Only run if input-elements are even
 
     //Run everything through Shape ???
     //Set Shape as below ??? (getType / setType ?)
@@ -77,6 +77,7 @@ int main(int argc, const char * argv[])
 
     //Polymorphism, base class pointer
 
+    //Run only if n is even VVVVVVVV
     if(n == 2)
     {
         Shape * p1 = new Point(numbers);
@@ -94,6 +95,12 @@ int main(int argc, const char * argv[])
         Shape * t1 = new Triangle(numbers);
         std::cout << t1->getType();
         delete t1;
+    }
+    else
+    {
+        Shape * poly = new Polygon(numbers);
+        std::cout << poly->getType();
+        delete poly;
     }
 
     /*
