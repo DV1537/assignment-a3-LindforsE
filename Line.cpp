@@ -33,8 +33,7 @@ double Line::area() const
 
 double Line::circumference() const
 {
-    double tmp;
-    return tmp;
+    return 0;
 }
 
 double* Line::position() const

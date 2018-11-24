@@ -68,5 +68,5 @@ double Triangle::distance(Shape s) const
 
 bool Triangle::isConvex() const
 {
-    return false;
+    return true;
 }
