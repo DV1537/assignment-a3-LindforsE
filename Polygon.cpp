@@ -4,10 +4,20 @@ Polygon::Polygon(const double * arr)
 {
     //Todo
     //decide int size, AKA nrOfElements;
-    //remember size/2
+    this->size = sizeof(arr) / sizeof(arr[0]);
+    
+    //remember size/2, due to element-pair = coordinate (X, Y)
     coord = new Vector2[size/2];
 
+    int j = 0;
     //for-loop to fill coord with every element from arr[]
+    for(int i = 0; i < size/2; i++)
+    {
+        coord[i].x = arr[j];
+        j++;
+        coord[i].y = arr[j];
+        j++;
+    }
 }
 
 Polygon::~Polygon()
@@ -51,23 +61,70 @@ double Polygon::area() const
 
 double Polygon::circumference() const
 {
-    //Todo
-    double tmp;
-    return tmp;
+    //add up all side lengths
+
+    double distance = 0;
+    int maxValue = size/2;
+
+    //Length between two points
+    // abs( sqrt( pow(coord[0].x - coord[1].x,2) + pow(coord[0].y - coord[1].y ,2) ) );    
+
+    //loop through all points
+    for(int i = 0; i < maxValue -1; i++)
+        distance += abs( sqrt( pow(coord[i].x - coord[i+1].x,2) + pow(coord[i].y - coord[i+1].y ,2) ) );
+
+    //last point and first point
+    distance += abs( sqrt( pow(coord[maxValue].x - coord[0].x,2) + pow(coord[maxValue].y - coord[0].y ,2) ) );
+
+    return distance;
 }
 
 double* Polygon::position() const
 {
-    //Todo
-    double tmp[2];
-    return tmp;
+    int maxValue = size/2;
+    double center[2];
+    double tmpX = 0, tmpY = 0, tmpA = 0, A = 0;
+    
+    //center.x (center[0]) += (X0 + X1) * ( (X0 * Y1) - (X1 * Y0) )
+    //center.y (center[1]) += (Y0 + Y1) * ( (X0 * Y1) - (X1 * Y0) )
+
+    //loop through all but last point
+    for(int i = 0; i < maxValue -1; i++)
+    {
+        tmpA = (coord[i].x * coord[i+1].y) - (coord[i+1].x * coord[i].y);
+        A += tmpA;
+        tmpX += (coord[i].x + coord[i+1].x) * tmpA;
+        tmpY += (coord[i].y + coord[i+1].y) * tmpA;
+    }
+
+    //last point and first point
+    tmpA = (coord[maxValue].x * coord[0].y) - (coord[0].x * coord[maxValue].y);
+    A += tmpA;
+    tmpX += (coord[maxValue].x + coord[0].x) * tmpA;
+    tmpY += (coord[maxValue].y + coord[0].y) * tmpA;
+
+    //half
+    A *= 0.5;
+
+    //multiply by 6
+    tmpX /= (6.0 * A);
+    tmpY /= (6.0 * A);
+
+    //insert center coordinates to return array
+    center[0] = tmpX;
+    center[1] = tmpY;
+
+    return center;
 }
 
 double Polygon::distance(Shape s) const
 {
-    //Todo
-    double tmp;
-    return tmp;
+    double *tmp = this->position();
+    double *other = s.position();
+
+    //Distance-algorithm
+    double dist = abs( sqrt( pow(tmp[0] - other[0], 2) + pow(tmp[1] - other[1], 2) ) );
+    return dist;
 }
 
 bool Polygon::isConvex() const
