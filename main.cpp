@@ -61,7 +61,11 @@ int main(int argc, const char * argv[])
     }
     myReadFile.close();
     
+    double arr[n];
 
+    for(int i = 0; i <n; i++)
+        arr[i] = numbers[i];
+    
     //Run everything through Shape ???
     //Set Shape as below ??? (getType / setType ?)
     //Typecast, C-style
@@ -81,25 +85,25 @@ int main(int argc, const char * argv[])
     if(n == 2)
     {
         Shape * p1 = new Point(numbers);
-        std::cout << p1->getType();
+        std::cout << p1->area();
         delete p1;
     }
     else if(n == 4)
     {
         Shape *l1 = new Line(numbers);
-        std::cout << l1->getType();
+        std::cout << l1->area();
         delete l1;
     }
     else if(n == 6)
     {
         Shape * t1 = new Triangle(numbers);
-        std::cout << t1->getType();
+        std::cout << t1->area();
         delete t1;
     }
     else
     {
-        Shape * poly = new Polygon(numbers);
-        std::cout << poly->getType();
+        Shape * poly = new Polygon(arr, n);
+        std::cout << poly->area();
         delete poly;
     }
 

@@ -27,8 +27,15 @@ std::string Triangle::getType() const
 
 double Triangle::area() const
 {
-    double tmp;
-    return tmp;
+    // | ( Ax(By - Cy) + Bx(Cy - Ay) + Cx (Ay - By)  ) / 2 |
+    std::cout << coord[0].x << " * (" << coord[1].y << " - " << coord[2].y << ") + " << coord[1].x << " * (" << coord[2].y << " - " << coord[0].y << ") + " << coord[2].x << " * (" << coord[0].y << " - " << coord[1].y << ") = ";
+    double area = ( (coord[0].x * (coord[1].y - coord[2].y) ) + ( coord[1].x * (coord[2].y - coord[0].y) ) + ( coord[2].x * (coord[0].y - coord[1].y) ) );
+    std::cout << area << '\n' << area << " / 2 = "; 
+    area *= 0.5;
+    std::cout << area;
+    area = std::fabs(area);
+    std::cout << "\nabs = " << area;
+    return area;
 }
 
 double Triangle::circumference() const

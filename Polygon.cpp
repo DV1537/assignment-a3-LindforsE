@@ -1,10 +1,12 @@
 #include "Polygon.h"
 
-Polygon::Polygon(const double * arr)
+Polygon::Polygon(double arr[], int n)
 {
     //Todo
     //decide int size, AKA nrOfElements;
-    this->size = sizeof(arr) / sizeof(arr[0]);
+    //Can't find size of array in function, array is passed by reference.
+    
+    this->size = n;
     
     //remember size/2, due to element-pair = coordinate (X, Y)
     coord = new Vector2[size/2];
@@ -46,10 +48,11 @@ double Polygon::area() const
             areaValue += (coord[i].x * coord[i+1].y) - (coord[i+1].x * coord[i].y);
         }
         //Last and first coordinate
-        areaValue += (coord[maxValue].x * coord[0].y) - (coord[0].x * coord[maxValue].y);
-        
+        areaValue += (coord[maxValue-1].x * coord[0].y) - (coord[0].x * coord[maxValue-1].y);
+
         //abs and divide by .5
-        areaValue = abs(areaValue) * (1/2);
+        areaValue = abs(areaValue);
+        areaValue *= 0.5;
     }
     else
     {
@@ -74,7 +77,7 @@ double Polygon::circumference() const
         distance += abs( sqrt( pow(coord[i].x - coord[i+1].x,2) + pow(coord[i].y - coord[i+1].y ,2) ) );
 
     //last point and first point
-    distance += abs( sqrt( pow(coord[maxValue].x - coord[0].x,2) + pow(coord[maxValue].y - coord[0].y ,2) ) );
+    distance += abs( sqrt( pow(coord[maxValue-1].x - coord[0].x,2) + pow(coord[maxValue-1].y - coord[0].y ,2) ) );
 
     return distance;
 }
@@ -98,10 +101,10 @@ double* Polygon::position() const
     }
 
     //last point and first point
-    tmpA = (coord[maxValue].x * coord[0].y) - (coord[0].x * coord[maxValue].y);
+    tmpA = (coord[maxValue-1].x * coord[0].y) - (coord[0].x * coord[maxValue-1].y);
     A += tmpA;
-    tmpX += (coord[maxValue].x + coord[0].x) * tmpA;
-    tmpY += (coord[maxValue].y + coord[0].y) * tmpA;
+    tmpX += (coord[maxValue-1].x + coord[0].x) * tmpA;
+    tmpY += (coord[maxValue-1].y + coord[0].y) * tmpA;
 
     //half
     A *= 0.5;
@@ -132,5 +135,5 @@ bool Polygon::isConvex() const
     //Todo
     //False if one or more interior angle(s) are greater than 180 degrees.
     //True if all interior angles are less than 180 degrees.
-    return false;
+    return true;
 }
