@@ -74,10 +74,10 @@ double Polygon::circumference() const
 
     //loop through all points
     for(int i = 0; i < maxValue -1; i++)
-        distance += abs( sqrt( pow(coord[i].x - coord[i+1].x,2) + pow(coord[i].y - coord[i+1].y ,2) ) );
+        distance += fabs( sqrt( pow(coord[i].x - coord[i+1].x,2) + pow(coord[i].y - coord[i+1].y ,2) ) );
 
     //last point and first point
-    distance += abs( sqrt( pow(coord[maxValue-1].x - coord[0].x,2) + pow(coord[maxValue-1].y - coord[0].y ,2) ) );
+    distance += fabs( sqrt( pow(coord[maxValue-1].x - coord[0].x,2) + pow(coord[maxValue-1].y - coord[0].y ,2) ) );
 
     return distance;
 }
@@ -126,7 +126,7 @@ double Polygon::distance(Shape s) const
     double *other = s.position();
 
     //Distance-algorithm
-    double dist = abs( sqrt( pow(tmp[0] - other[0], 2) + pow(tmp[1] - other[1], 2) ) );
+    double dist = fabs( sqrt( pow(tmp[0] - other[0], 2) + pow(tmp[1] - other[1], 2) ) );
     return dist;
 }
 
