@@ -4,11 +4,16 @@
 #include "Triangle.h"
 #include "Polygon.h"
 
+void expand(double *&arr, int &size);
+
 int main(int argc, const char * argv[])
 {
     int size = 2;
     double a = 0;
     int n = 0;
+    char tempChar;
+    char endLine = '\n';
+    std::string line;
 
     //std::cout.setprecision() only available with iomanip
     //std::cout.precision() doesn't work for decimals
@@ -38,24 +43,14 @@ int main(int argc, const char * argv[])
                 //if no space in array, expand
                 if (n >= size)
                 {
-                    size = size * 2;
-                    //1. New bigger array (new, mem-leak)
-                    double * tmp = new double[size];
-                    //2. Copy elements to new array
-                    for (int i = 0; i < n; i++)
-                        tmp[i] = numbers[i];
-
-                    //3. Delete pointer (del, mem-leak)
-                    delete [] numbers;
-                    //4. Redirect pointer
-                    numbers = tmp;
+                    expand(numbers, size);
                 }
             }   
             //if not a number
             else
             {
                 myReadFile.clear();
-                myReadFile.ignore(10, ' ');
+                myReadFile.ignore(1, ' ');
             }
         }
     }
@@ -84,34 +79,49 @@ int main(int argc, const char * argv[])
     //Run only if n is even VVVVVVVV
     if( (n %2) == 0 )
     {
+        Shape * s1;
         if(n == 2)
         {
-            Shape * p1 = new Point(numbers);
-            std::cout << p1->area();
-            delete p1;
+            s1 = new Point(numbers);
+            std::cout << s1->area();
         }
         else if(n == 4)
         {
-            Shape *l1 = new Line(numbers);
-            std::cout << l1->area();
-            delete l1;
+            s1 = new Line(numbers);
+            std::cout << s1->area();
         }
         else if(n == 6)
         {
-            Shape * t1 = new Triangle(numbers);
-            std::cout << t1->area();
-            delete t1;
+            s1 = new Triangle(numbers);
+            std::cout << s1->area();
         }
         else
         {
-            Shape * poly = new Polygon(arr, n);
-            std::cout << poly->area();
-            delete poly;
+            s1 = new Polygon(arr, n);
+            std::cout << s1->area();
         }
+
+        delete s1;
     }
 
     //Delete dynamic array (del, mem leak)
     delete [] numbers;
 
     return 0;
+}
+
+void expand(double *&arr, int &size)
+{
+    int n = size;
+    size = size * 2;
+    //1. New bigger array (new, mem-leak)
+    double * tmp = new double[size];
+    //2. Copy elements to new array
+    for (int i = 0; i < n; i++)
+        tmp[i] = arr[i];
+
+    //3. Delete pointer (del, mem-leak)
+    delete [] arr;
+    //4. Redirect pointer
+    arr = tmp;
 }

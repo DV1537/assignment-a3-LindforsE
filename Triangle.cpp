@@ -73,3 +73,8 @@ bool Triangle::isConvex() const
 {
     return true;
 }
+
+bool Triangle::operator = (const Shape & other)
+{
+
+}

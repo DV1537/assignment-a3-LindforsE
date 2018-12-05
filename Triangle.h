@@ -27,6 +27,7 @@ public:
     virtual double distance(const Shape & s);
     virtual bool isConvex() const;
 
+    bool operator = (const Shape & other);
 };
 
 
