@@ -3,23 +3,26 @@
 #include "Line.h"
 #include "Triangle.h"
 #include "Polygon.h"
+#include <sstream>
 
 void expand(double *&arr, int &size);
 
 int main(int argc, const char * argv[])
 {
-    int size = 2;
+    int size = 2, size2 = 2;
     double a = 0;
-    int n = 0;
+    int n = 0, count = 0;
     char tempChar;
     char endLine = '\n';
-    std::string line;
+    std::string line, tmpNr;
+    bool line2 = false;
 
     //std::cout.setprecision() only available with iomanip
     //std::cout.precision() doesn't work for decimals
 
     //(new, mem-leak)
     double * numbers = new double[size];
+    double * numbers2 = new double[size2];
    
     //Read numbers from file. filename through argv[]
     std::ifstream myReadFile;
@@ -35,6 +38,26 @@ int main(int argc, const char * argv[])
         //Read loop
         while (!(myReadFile.eof()))
         {
+            
+            std::getline(myReadFile, line);
+            std::stringstream linestream(line);
+            while(std::getline(linestream, tmpNr, ' ') && !line2)
+            {
+                numbers[n] = std::stod(tmpNr);
+                n++;
+                if(n >= size)
+                    expand(numbers, size);
+            }
+
+            while(std::getline(linestream, tmpNr, ' ') && line2)
+            {
+                numbers2[count] = std::stod(tmpNr);
+                count++;
+                if(count >= size2)
+                    expand(numbers2, size2);
+            }
+
+            /*
             //if a number
             if (myReadFile >> a)
             {   
@@ -52,6 +75,8 @@ int main(int argc, const char * argv[])
                 myReadFile.clear();
                 myReadFile.ignore(1, ' ');
             }
+            */
+            line2 = true;
         }
     }
     myReadFile.close();
@@ -73,8 +98,6 @@ int main(int argc, const char * argv[])
     //2 point(s) = Line
     //3 point(s) = Triangle
     //4 or more point(s) = Polygon
-
-    //Polymorphism, base class pointer
 
     //Run only if n is even VVVVVVVV
     if( (n %2) == 0 )
@@ -106,6 +129,7 @@ int main(int argc, const char * argv[])
 
     //Delete dynamic array (del, mem leak)
     delete [] numbers;
+    delete [] numbers2;
 
     return 0;
 }
