@@ -53,3 +53,8 @@ bool Point::isConvex() const
 {
     return false;
 }
+
+bool Point::operator = (const Shape & other)
+{
+
+}

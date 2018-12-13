@@ -58,3 +58,8 @@ bool Line::isConvex() const
 {
     return false;
 }
+
+bool Line::operator = (const Shape & other)
+{
+
+}
