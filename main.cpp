@@ -12,10 +12,8 @@ int main(int argc, const char * argv[])
     int size = 2, size2 = 2;
     double a = 0;
     int n = 0, count = 0;
-    char tempChar;
-    char endLine = '\n';
     std::string line, tmpNr;
-    bool line2 = false;
+    bool line2 = false, shape2 = false;
 
     //std::cout.setprecision() only available with iomanip
     //std::cout.precision() doesn't work for decimals
@@ -41,20 +39,22 @@ int main(int argc, const char * argv[])
             
             std::getline(myReadFile, line);
             std::stringstream linestream(line);
-            while(std::getline(linestream, tmpNr, ' ') && !line2)
+            while(!line2 && std::getline(linestream, tmpNr, ' '))
             {
                 numbers[n] = std::stod(tmpNr);
                 n++;
                 if(n >= size)
                     expand(numbers, size);
             }
+            
 
-            while(std::getline(linestream, tmpNr, ' ') && line2)
+            while(line2 && std::getline(linestream, tmpNr, ' '))
             {
                 numbers2[count] = std::stod(tmpNr);
                 count++;
                 if(count >= size2)
                     expand(numbers2, size2);
+                shape2 = true;
             }
 
             /*
@@ -85,6 +85,11 @@ int main(int argc, const char * argv[])
 
     for(int i = 0; i <n; i++)
         arr[i] = numbers[i];
+
+    double arr2[count];
+
+    for(int i = 0; i < count; i++)
+        arr2[i] = numbers2[i];
     
     //Run everything through Shape ???
     //Set Shape as below ??? (getType / setType ?)
@@ -102,29 +107,26 @@ int main(int argc, const char * argv[])
     //Run only if n is even VVVVVVVV
     if( (n %2) == 0 )
     {
-        Shape * s1;
-        if(n == 2)
-        {
-            s1 = new Point(numbers);
-            std::cout << s1->area();
-        }
-        else if(n == 4)
-        {
-            s1 = new Line(numbers);
-            std::cout << s1->area();
-        }
-        else if(n == 6)
-        {
-            s1 = new Triangle(numbers);
-            std::cout << s1->area();
-        }
-        else
-        {
-            s1 = new Polygon(arr, n);
-            std::cout << s1->area();
-        }
+        Polygon s1(arr, n);
+        Polygon s2(arr2, count);
 
-        delete s1;
+        //s1 = new Polygon(arr, n);
+        std::cout << s1.area() << '\n';
+        std::cout << s1;
+
+        //s2 = new Polygon(arr2, count);
+        std::cout << '\n' << s2.area();
+        std::cout << '\n';
+        //Segmentation error if anything before or after overloaded <<
+        std::cout << s2;
+        std::cout << '\n';
+
+        s1 + s2;
+        std::cout << s1;
+        std::cout << '\n' << s1.area();
+
+        //delete s1;
+        //delete s2;
     }
 
     //Delete dynamic array (del, mem leak)

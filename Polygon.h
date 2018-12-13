@@ -13,6 +13,7 @@ private:
     };
     Vector2 * coord;
     int size;
+    void expand(int newSize);
 
 public:
 
@@ -27,6 +28,12 @@ public:
     virtual double distance(const Shape & s);
     virtual bool isConvex() const;
 
+    int getSize() const;
+    void setSize(const int);
+
+    bool operator + (const Polygon & other);
+    bool operator = (const Shape & other);
+    friend std::ostream &operator << (std::ostream &out, Polygon a);
 };
 
 #endif //POLYGON_H
