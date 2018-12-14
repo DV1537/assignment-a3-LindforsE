@@ -32,8 +32,9 @@ public:
     void setSize(const int);
 
     bool operator + (const Polygon & other);
-    bool operator = (const Shape & other);
-    friend std::ostream &operator << (std::ostream &out, Polygon a);
+    //bool operator = (const Shape & other);
+    Polygon& operator = (const Polygon & other);
+    friend std::ostream &operator << (std::ostream &out, Polygon &a);
 };
 
 #endif //POLYGON_H

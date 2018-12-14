@@ -105,28 +105,20 @@ int main(int argc, const char * argv[])
     //4 or more point(s) = Polygon
 
     //Run only if n is even VVVVVVVV
-    if( (n %2) == 0 )
+    if( (n %2) == 0 && (count%2) == 0 )
     {
         Polygon s1(arr, n);
         Polygon s2(arr2, count);
 
         //s1 = new Polygon(arr, n);
-        std::cout << s1.area() << '\n';
-        std::cout << s1;
+        //std::cout << s1.area() << '\n';
 
         //s2 = new Polygon(arr2, count);
-        std::cout << '\n' << s2.area();
-        std::cout << '\n';
-        //Segmentation error if anything before or after overloaded <<
-        std::cout << s2;
-        std::cout << '\n';
+        //std::cout << '\n' << s2.area();
 
         s1 + s2;
-        std::cout << s1;
+        //std::cout << s1;
         std::cout << '\n' << s1.area();
-
-        //delete s1;
-        //delete s2;
     }
 
     //Delete dynamic array (del, mem leak)

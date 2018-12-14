@@ -4,18 +4,19 @@ void Polygon::expand(int newSize)
 {
     //Temp pointer, expanded
     Vector2 * tmp = new Vector2[newSize/2];
+
     //Copy all elements to new pointer
     for(int i = 0; i < this->size/2; i++)
     {
-        std::cout << "coord" << i << " (" << coord[i].x << "," << coord[i].y << ")\n";
-        tmp[i].x = coord[i].x;
-        tmp[i].y = coord[i].y;
-        std::cout << "tmp" << i << " (" << tmp[i].x << "," << tmp[i].y << ")\n";
+        tmp[i].x = this->coord[i].x;
+        tmp[i].y = this->coord[i].y;
     }
+
     //Delete old pointer
-    delete [] coord;
+    delete [] this->coord;
+
     //Point new pointer
-    coord = tmp;
+    this->coord = tmp;
 
     //Change size
     this->size = newSize;
@@ -23,7 +24,6 @@ void Polygon::expand(int newSize)
 
 Polygon::Polygon(double arr[], int n)
 {
-    //Todo
     //decide int size, AKA nrOfElements;
     //Can't find size of array in function, array is passed by reference.
     
@@ -153,7 +153,6 @@ double Polygon::distance(const Shape & s)
 
 bool Polygon::isConvex() const
 {
-    //Todo
     //False if one or more interior angle(s) are greater than 180 degrees.
     //True if all interior angles are less than 180 degrees.
 
@@ -269,17 +268,13 @@ void Polygon::setSize(const int a)
 
 bool Polygon::operator + (const Polygon & other)
 {
-    for(int i = 0; i < this->size/2; i++)
-        std::cout << i << " (" << this->coord[i].x << "," << this->coord[i].y << ")\n";
-
     //Expand (this) to fit new coordinates
     expand(this->size + other.getSize());
 
-    //Add the coordinates from other to this
     //Remember to change this->size
-
     int otherSize = other.getSize()/2;
 
+    //Add the coordinates from other to this
     int j = 0;
     //Add other coordinates, start where this ends,
     for(int i = this->size/2-otherSize; i < (this->size/2); i++)
@@ -293,18 +288,35 @@ bool Polygon::operator + (const Polygon & other)
     return true;
 }
 
-bool Polygon::operator = (const Shape & other)
+Polygon& Polygon::operator = (const Polygon & other)
 {
     //Check if other == this
-    
-    //if not, this will become other
+    if(this != &other)
+    {
+        //Removal
+        delete [] this->coord;
+
+        //Copy
+        this->size = other.getSize();
+        this->coord = new Vector2[this->size/2];
+
+        //Deep-copy
+        for(int i = 0; i < other.size/2; i++)
+        {
+            this->coord[i].x = other.coord[i].x;
+            this->coord[i].y = other.coord[i].y;
+        }
+    }
+    //Return
+    return *this;
 }
 
-std::ostream &operator << (std::ostream & out, Polygon a)
+std::ostream &operator << (std::ostream & out, Polygon &a)
 {
     out << "Type: " << a.getType() << std::endl;
     for(int i = 0; i < a.getSize()/2; i++)
     {
         out << "Point " << i+1 << ": (" << a.coord[i].x << ", " << a.coord[i].y << ")" << std::endl;
     }
+    return out;
 }
